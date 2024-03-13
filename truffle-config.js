@@ -16,7 +16,7 @@ module.exports = {
         mumbai: {
             provider: () => new HDWalletProvider(
                 'shallow jeans bring fame together inch length near rhythm when cheese furnace',
-                "https://polygon-mumbai-pokt.nodies.app",0
+                "https://polygon-mumbai-bor-rpc.publicnode.com",0
             ),
             from:"0x078Dc6A9d50fa0aBE5A8383D07E355bF6E751C92",
             gas: 4500000,
