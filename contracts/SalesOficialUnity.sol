@@ -44,9 +44,7 @@ contract SalesOficialUnity{
         phaseStartTime = block.timestamp;
 
         for (uint i = 0; i < 3; i++) {
-            uint discountPercentage = (i == 0) ? 20 : (i == 1) ? 10 : 0;
-            uint discountedPrice = (buyPrice * (100 - discountPercentage)) / 100;
-            phases.push(Phase(phaseTarget, discountedPrice, i + 1));
+            phases.push(Phase(phaseTarget, buyPrice, i + 1));
         }
     }
 
@@ -90,16 +88,24 @@ contract SalesOficialUnity{
         uint timeElapsed = currentTime - phaseStartTime;
         uint remainingTokens = phases[currentPhaseIndex].total - sold;
 
-        if (timeElapsed >= regressive) {
-            sold = 0;
-            currentPhaseIndex++; 
-            phaseStartTime = currentTime; 
+        sold = 0;
+        currentPhaseIndex++;
 
-        
-            if (currentPhaseIndex > 0 && currentPhaseIndex < 3) {
-                phases[currentPhaseIndex].total += remainingTokens;
-            }
+        if (currentPhaseIndex >= phases.length) {
+            currentPhaseIndex = 0; // Reiniciar a la fase 1
         }
+
+        // Calcular el total de tokens que se usarán en la nueva fase
+        uint newPhaseTotal = phases[currentPhaseIndex].total + remainingTokens;
+
+        // Asegurarse de no exceder el total permitido
+        if (newPhaseTotal > totalTokenscontract - totalTokensSold) {
+            phases[currentPhaseIndex].total = totalTokenscontract - totalTokensSold;
+        } else {
+            phases[currentPhaseIndex].total = newPhaseTotal;
+        }
+    
+        phaseStartTime = block.timestamp;
     }
 
     function claimUSDT() public onlyOwner {
