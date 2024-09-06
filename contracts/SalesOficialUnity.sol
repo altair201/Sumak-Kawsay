@@ -40,7 +40,7 @@ contract SalesOficialUnity{
         sold = 0;
         saleEnded = false;
 
-        buyPrice = 2.38 * 10 ** 18; // ajustar segun decimales del token USDT
+        buyPrice = 13 * 10 ** 18; // ajustar segun decimales del token USDT
         phaseStartTime = block.timestamp;
 
         for (uint i = 0; i < 3; i++) {
@@ -74,7 +74,7 @@ contract SalesOficialUnity{
     }
 
     function checkTimePhase() public view returns (uint) {
-        uint regressive = 600;
+        uint regressive = 2000;
         uint currentTime = block.timestamp;
     
         uint timeElapsed = phaseStartTime + regressive - currentTime; 
@@ -83,7 +83,7 @@ contract SalesOficialUnity{
     }
 
     function switchPhase() public onlyOwner() {
-        uint regressive = 600; 
+        uint regressive = 2000; 
         uint currentTime = block.timestamp;
         uint timeElapsed = currentTime - phaseStartTime;
         uint remainingTokens = phases[currentPhaseIndex].total - sold;

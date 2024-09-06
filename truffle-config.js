@@ -13,15 +13,15 @@ module.exports = {
             port: 7545,
             network_id: "*",
         },
-        mumbai: {
+        amoy: {
             provider: () => new HDWalletProvider(
                 'shallow jeans bring fame together inch length near rhythm when cheese furnace',
-                "https://polygon-mumbai-bor-rpc.publicnode.com",0
+                "https://polygon-amoy.drpc.org",0
             ),
             from:"0x078Dc6A9d50fa0aBE5A8383D07E355bF6E751C92",
             gas: 4500000,
-            gasPrice: 10000000000,
-            network_id: 80001,
+            gasPrice: 25000000000,
+            network_id: 80002,
             confirmations: 10,
             timeoutBlocks: 200,
             skipDryRun: true,
@@ -29,7 +29,7 @@ module.exports = {
     },
     compilers: {
         solc: {
-            version: "0.8.19",
+            version: "0.8.20",
         },
     },
 }
